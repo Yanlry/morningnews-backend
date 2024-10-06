@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
 
-const MONGODB_URI = process.env.CONNECTION_STRING;
+const connectionString = process.env.CONNECTION_STRING;
 
-mongoose.connect(MONGODB_URI)
-  .then(() => console.log('Database connected'))
-  .catch(err => console.error('Database connection error:', err));
-
+mongoose.connect(connectionString, { connectTimeoutMS: 2000 })
+ .then(() => console.log('Database connected'))
+ .catch (error => console.error(error));
+ 
 module.exports = mongoose;
